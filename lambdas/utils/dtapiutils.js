@@ -277,9 +277,7 @@ exports.getTimeseries = function(tsId, entities, timefrom, timeto, querymode, ag
     }
     
     // build our post body
-    var postBody = {
-        timeseriesId : tsId
-    };
+    var postBody = { };
     
     if(entities) postBody.entities = entities;
     if(timefrom) postBody.startTimestamp = timefrom;
@@ -295,7 +293,7 @@ exports.getTimeseries = function(tsId, entities, timefrom, timeto, querymode, ag
     }
     
     // Lets call the timeseries API
-    exports.dtApiPost(exports.getDtTenantUrl() + "/api/v1/timeseries", exports.getDtApiToken(), postBody, function(statusCode, data) {
+    exports.dtApiPost(exports.getDtTenantUrl() + "/api/v1/timeseries/" + tsId, exports.getDtApiToken(), postBody, function(statusCode, data) {
         if(statusCode > 299) {
             console.log("Dynatrace API Call failed: " + statusCode + " " + data);
             callback(statusCode, null);
